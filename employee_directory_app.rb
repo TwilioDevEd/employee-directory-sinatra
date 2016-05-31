@@ -13,15 +13,18 @@ class EmployeeDirectoryApp < Sinatra::Application
   Employee.auto_upgrade!
 
   get '/employee' do
+    employees = search(params['body'])
+
     content_type 'application/xml'
-
-    employees = if is_number?(params['body'])
-      [Employee.get(params['body'])]
-    else
-      Employee.all(:name.like => "%#{params['body']}%")
-    end
-
     to_twiml(employees).to_xml
+  end
+
+  def search(employee_reference)
+    if is_number? employee_reference
+      [Employee.get(employee_reference)]
+    else
+      Employee.all(:name.like => "%#{employee_reference}%")
+    end
   end
 
   def is_number?(value)
@@ -29,9 +32,11 @@ class EmployeeDirectoryApp < Sinatra::Application
   end
 
   def to_twiml(employees)
-    employees_name_list = employees.map { |employee| "#{employee.name}" }
+    employees_name_list = employees.map do |employee|
+      "#{employee.id}-#{employee.name}"
+    end
     Twilio::TwiML::Response.new do |response|
-      response.Message employees_name_list.join('\n')
+      response.Message employees_name_list.join(' ')
     end
   end
 

@@ -47,8 +47,7 @@ RSpec.describe 'Employee Directory App' do
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')
         expect(messages.size).to eq(1)
-        expect(response.xpath('Response/Message[text() ="Pietro Maximoff"]'))
-          .not_to be_empty
+        expect(messages.inner_html).to eq("#{pietro.id}-#{pietro.name}")
       end
     end
     context 'when looking for Peter' do
@@ -71,7 +70,8 @@ RSpec.describe 'Employee Directory App' do
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')
         expect(messages.size).to eq(1)
-        expect(messages.first.inner_html).to include(peters.first.name)
+        expect(messages.first.inner_html).
+          to include("#{peters.first.id}-#{peters.first.name}")
       end
     end
   end
