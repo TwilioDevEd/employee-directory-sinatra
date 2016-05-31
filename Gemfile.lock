@@ -5,6 +5,7 @@ GEM
     bcrypt (3.1.11)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    builder (3.2.2)
     data_objects (0.10.17)
       addressable (~> 2.1)
     datamapper (1.2.0)
@@ -57,6 +58,7 @@ GEM
     fastercsv (1.5.5)
     json (1.8.3)
     json_pure (1.8.3)
+    jwt (1.5.3)
     mini_portile2 (2.0.0)
     multi_json (1.12.1)
     nokogiri (1.6.7.2)
@@ -85,6 +87,10 @@ GEM
       tilt (>= 1.3, < 3)
     stringex (1.5.1)
     tilt (2.0.4)
+    twilio-ruby (4.11.1)
+      builder (>= 2.1.2)
+      jwt (~> 1.0)
+      multi_json (>= 1.3.0)
     uuidtools (2.1.5)
 
 PLATFORMS
@@ -97,6 +103,7 @@ DEPENDENCIES
   rack-test
   rspec
   sinatra
+  twilio-ruby (~> 4.11.1)
 
 BUNDLED WITH
    1.11.2
