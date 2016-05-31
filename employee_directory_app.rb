@@ -5,8 +5,7 @@ require_relative 'employee'
 
 class EmployeeDirectoryApp < Sinatra::Application
 
-  DataMapper.setup(:default,
-                   "sqlite3://#{Dir.pwd}/employee_dir_test_database.db")
+  DataMapper.setup(:default, ENV['EMPLOYEE_DIR_DATABASE_URL'])
 
   DataMapper.finalize
 
