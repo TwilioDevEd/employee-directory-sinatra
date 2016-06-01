@@ -2,6 +2,7 @@ require 'sinatra'
 require 'data_mapper'
 require 'twilio-ruby'
 require_relative 'employee'
+require_relative 'employee_directory/employee_directory'
 
 class EmployeeDirectoryApp < Sinatra::Application
 
@@ -12,22 +13,10 @@ class EmployeeDirectoryApp < Sinatra::Application
   Employee.auto_upgrade!
 
   get '/employee' do
-    employees = search(params['body'])
+    employees = EmployeeDirectory::search(params['body'])
 
     content_type 'application/xml'
     to_twiml(employees).to_xml
-  end
-
-  def search(employee_reference)
-    if is_number? employee_reference
-      [Employee.get(employee_reference)]
-    else
-      Employee.all(:name.like => "%#{employee_reference}%")
-    end
-  end
-
-  def is_number?(value)
-    value =~ /^\d*$/
   end
 
   def to_twiml(employees)
