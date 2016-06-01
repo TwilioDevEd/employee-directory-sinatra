@@ -71,9 +71,25 @@ RSpec.describe 'Employee Directory App' do
 
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')
+        media = response.xpath('Response/Media')
         expect(messages.size).to eq(1)
+        expect(media.size).to eq(1)
         expect(messages.first.inner_html).
           to include("#{peters.first.id}-#{peters.first.name}")
+        expect(media.first.inner_html).
+          to eq(peters.first.image_url)
+      end
+    end
+    context 'when looking for unexistent employee' do
+      it 'informs that no employee was found' do
+        get 'employee?body=unexistent'
+
+        response = Nokogiri::XML(last_response.body)
+        messages = response.xpath('Response/Message')
+
+        expect(messages.size).to eq(1)
+        expect(messages.first.inner_html).
+          to include('not found')
       end
     end
   end
