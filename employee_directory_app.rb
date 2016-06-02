@@ -46,8 +46,10 @@ class EmployeeDirectoryApp < Sinatra::Application
       employee_info = "#{employee.id}-#{employee.name}"\
         " #{employee.email}"\
         " #{employee.phone_number}"
-      response.Message employee_info
-      response.Media employee.image_url
+      response.Message do |message|
+        message.Body employee_info
+        message.Media employee.image_url
+      end
     end
   end
 

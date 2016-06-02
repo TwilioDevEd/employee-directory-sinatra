@@ -47,7 +47,7 @@ RSpec.describe 'Employee Directory App' do
       it 'returns a twiml with pietro info' do
         get "employee?Body=#{pietro.name}"
         response = Nokogiri::XML(last_response.body)
-        messages = response.xpath('Response/Message')
+        messages = response.xpath('Response/Message/Body')
         expect(messages.size).to eq(1)
         expect(messages.inner_html)
           .to include("#{pietro.id}-#{pietro.name}")
@@ -60,7 +60,7 @@ RSpec.describe 'Employee Directory App' do
         get "employee?Body=#{pietro.name}"
 
         response = Nokogiri::XML(last_response.body)
-        media = response.xpath('Response/Message')
+        media = response.xpath('Response/Message/Media')
         expect(media.size).to eq(1)
         expect(media.inner_html).to eq(pietro.image_url)
       end
@@ -83,8 +83,8 @@ RSpec.describe 'Employee Directory App' do
         get "employee?Body=#{peters.first.id}"
 
         response = Nokogiri::XML(last_response.body)
-        messages = response.xpath('Response/Message')
-        media = response.xpath('Response/Media')
+        messages = response.xpath('Response/Message/Body')
+        media = response.xpath('Response/Message/Media')
         expect(messages.size).to eq(1)
         expect(media.size).to eq(1)
         expect(messages.first.inner_html).
