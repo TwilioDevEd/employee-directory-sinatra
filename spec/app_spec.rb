@@ -45,7 +45,7 @@ RSpec.describe 'Employee Directory App' do
   describe 'employee endpoint' do
     context 'when looking for pietro' do
       it 'returns a twiml with pietro info' do
-        get "employee?body=#{pietro.name}"
+        get "employee?Body=#{pietro.name}"
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')
         expect(messages.size).to eq(1)
@@ -55,7 +55,7 @@ RSpec.describe 'Employee Directory App' do
     context 'when looking for Peter' do
       it 'returns everybody named as Peter' do
         peters
-        get "employee?body=Peter"
+        get "employee?Body=Peter"
 
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')
@@ -67,7 +67,7 @@ RSpec.describe 'Employee Directory App' do
     end
     context 'when specifying an id' do
       it 'retrieves the employee info' do
-        get "employee?body=#{peters.first.id}"
+        get "employee?Body=#{peters.first.id}"
 
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')

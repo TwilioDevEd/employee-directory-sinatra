@@ -16,7 +16,7 @@ class EmployeeDirectoryApp < Sinatra::Application
   Seeder.seed
 
   get '/employee' do
-    employees = EmployeeDirectory::search(params['body'])
+    employees = EmployeeDirectory::search(params['Body'])
 
     content_type 'application/xml'
 
