@@ -43,7 +43,10 @@ class EmployeeDirectoryApp < Sinatra::Application
 
   def show(employee)
     Twilio::TwiML::Response.new do |response|
-      response.Message "#{employee.id}-#{employee.name}"
+      employee_info = "#{employee.id}-#{employee.name}"\
+        " #{employee.email}"\
+        " #{employee.phone_number}"
+      response.Message employee_info
       response.Media employee.image_url
     end
   end

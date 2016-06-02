@@ -49,7 +49,20 @@ RSpec.describe 'Employee Directory App' do
         response = Nokogiri::XML(last_response.body)
         messages = response.xpath('Response/Message')
         expect(messages.size).to eq(1)
-        expect(messages.inner_html).to eq("#{pietro.id}-#{pietro.name}")
+        expect(messages.inner_html)
+          .to include("#{pietro.id}-#{pietro.name}")
+        expect(messages.inner_html)
+          .to include(pietro.email)
+        expect(messages.inner_html)
+          .to include(pietro.phone_number)
+      end
+      it 'return pietro photo' do
+        get "employee?Body=#{pietro.name}"
+
+        response = Nokogiri::XML(last_response.body)
+        media = response.xpath('Response/Message')
+        expect(media.size).to eq(1)
+        expect(media.inner_html).to eq(pietro.image_url)
       end
     end
     context 'when looking for Peter' do
