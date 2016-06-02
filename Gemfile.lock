@@ -99,6 +99,7 @@ PLATFORMS
 DEPENDENCIES
   datamapper
   dm-sqlite-adapter
+  json
   nokogiri
   rack-test
   rspec
