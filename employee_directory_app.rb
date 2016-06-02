@@ -1,31 +1,22 @@
 require 'sinatra'
 require 'data_mapper'
 require 'twilio-ruby'
-require_relative 'employee'
 require_relative 'employee_directory/employee_directory'
-require_relative 'seeder'
 
 class EmployeeDirectoryApp < Sinatra::Application
 
-  DataMapper.setup(:default, ENV['EMPLOYEE_DIR_DATABASE_URL'])
-
-  DataMapper.finalize
-
-  Employee.auto_upgrade!
-
-  Seeder.seed
+  set :employee_directory,
+    EmployeeDirectory::init(ENV['EMPLOYEE_DIR_DATABASE_URL'])
 
   get '/employee' do
-    employees = EmployeeDirectory::search(params['Body'])
+    employees = settings.employee_directory.search(params['Body'])
 
     content_type 'application/xml'
 
-    if employees.size == 0
-      employee_not_found_message
-    elsif employees.size > 1
-      listing_message(employees)
-    else
-      details_message(employees.first)
+    case employees.size
+      when 0 then employee_not_found_message
+      when 1 then details_message(employees.first)
+      else listing_message(employees)
     end
   end
 
