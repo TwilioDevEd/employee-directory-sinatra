@@ -21,36 +21,44 @@ class EmployeeDirectoryApp < Sinatra::Application
     content_type 'application/xml'
 
     if employees.size == 0
-      r = Twilio::TwiML::Response.new do |response|
-        response.Message 'not found'
-      end
-      r.to_xml
+      employee_not_found_message
     elsif employees.size > 1
-      to_twiml(employees).to_xml
+      listing_message(employees)
     else
-      show(employees.first).to_xml
+      details_message(employees.first)
     end
   end
 
-  def to_twiml(employees)
-    employees_name_list = employees.map do |employee|
+  private
+  def employee_not_found_message()
+    Twilio::TwiML::Response.new do |response|
+      response.Message 'not found'
+    end.to_xml
+  end
+
+  def listing_message(employees)
+    Twilio::TwiML::Response.new do |response|
+      response.Message employees_label_list(employees).join(' ')
+    end.to_xml
+  end
+
+  def employees_label_list(employees)
+    employees.map do |employee|
       "#{employee.id}-#{employee.name}"
     end
-    Twilio::TwiML::Response.new do |response|
-      response.Message employees_name_list.join(' ')
-    end
   end
 
-  def show(employee)
+  def details_message(employee)
     Twilio::TwiML::Response.new do |response|
       employee_info = "#{employee.id}-#{employee.name}"\
         " #{employee.email}"\
         " #{employee.phone_number}"
+
       response.Message do |message|
         message.Body employee_info
         message.Media employee.image_url
       end
-    end
+    end.to_xml
   end
 
   run! if app_file == $0
