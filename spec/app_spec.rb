@@ -4,7 +4,7 @@ require 'nokogiri'
 require_relative '../employee_directory/employee'
 
 ENV['EMPLOYEE_DIR_DATABASE_URL'] = "sqlite3://#{Dir.pwd}/employee_dir_test_database.db"
-require_relative '../employee_directory_app'
+require_relative '../app'
 
 RSpec.describe 'Employee Directory App' do
   include Rack::Test::Methods
