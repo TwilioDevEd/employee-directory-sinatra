@@ -2,7 +2,7 @@
   <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
 </a>
 
-# SMS Two-Factor Authentication
+# Employee Directory with Sinatra
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/employee-directory-sinatra.svg?branch=master)](https://travis-ci.org/TwilioDevEd/employee-directory-sinatra)
 
