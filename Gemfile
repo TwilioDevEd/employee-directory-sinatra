@@ -6,6 +6,7 @@ gem 'datamapper'
 gem 'dm-sqlite-adapter'
 gem 'json'
 gem 'twilio-ruby', '~> 4.11.1'
+gem 'rake'
 
 group :test do
   gem 'rspec'
