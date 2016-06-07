@@ -16,93 +16,79 @@ RSpec.describe 'Employee Directory App' do
 
   before(:each) { Employee.destroy }
 
-  let(:peters) do
-    [
-      Employee.create(
-        name: 'Peter Parker',
-        image_url: 'test',
-        email: 'peter@email.com',
-        phone_number: '0000-0000'
-      ),
-      Employee.create(
-        name: 'Peter Quill',
-        image_url: 'test',
-        email: 'quill@email.com',
-        phone_number: '0000-0000'
-      )
-    ]
+  let!(:peters) do
+    [create(:employee, 'Peter Parker'), create(:employee, 'Peter Quill')]
   end
 
-  let(:pietro) do
-    Employee.create(
-      name: 'Pietro Maximoff',
-      image_url: 'teste',
-      email: 'pietro@email.com',
-      phone_number: '0000-0000'
-    )
-  end
+  describe 'GET: /employee' do
+    context 'when looking for Pietro' do
+      let(:pietro) { create(:employee, 'Pietro Maximoff') }
 
-  describe 'employee endpoint' do
-    context 'when looking for pietro' do
-      it 'returns a twiml with pietro info' do
-        get "employee?Body=#{pietro.name}"
-        response = Nokogiri::XML(last_response.body)
-        messages = response.xpath('Response/Message/Body')
-        expect(messages.size).to eq(1)
-        expect(messages.inner_html).to include("#{pietro.id}-#{pietro.name}")
-        expect(messages.inner_html).to include(pietro.email)
-        expect(messages.inner_html).to include(pietro.phone_number)
+      it "returns a TwiML with Pietro's info" do
+        get '/employee', Body: pietro.name
+
+        doc = Nokogiri::XML(last_response.body)
+        message_body = doc.at_xpath('Response/Message/Body').content
+        expect(message_body).to include("#{pietro.id}-#{pietro.name}")
+        expect(message_body).to include(pietro.email)
       end
 
-      it 'return pietro photo' do
-        get "employee?Body=#{pietro.name}"
+      it "returns Pietro's photo" do
+        get '/employee', Body: pietro.name
 
-        response = Nokogiri::XML(last_response.body)
-        media = response.xpath('Response/Message/Media')
+        doc = Nokogiri::XML(last_response.body)
+        media = doc.xpath('Response/Message/Media')
         expect(media.size).to eq(1)
         expect(media.inner_html).to eq(pietro.image_url)
       end
     end
 
     context 'when looking for Peter' do
-      it 'returns everybody named as Peter' do
-        peters
-        get 'employee?Body=Peter'
+      it 'returns the people with the name Peter' do
+        get 'employee', Body: 'Peter'
 
-        response = Nokogiri::XML(last_response.body)
-        messages = response.xpath('Response/Message')
-        expect(messages.size).to eq(1)
+        doc = Nokogiri::XML(last_response.body)
+        content = doc.at_xpath('Response/Message').content
         peters.each do |employee|
-          expect(messages.first.inner_html).to include(employee.name)
+          expect(content).to include(employee.name)
         end
       end
     end
 
-    context 'when specifying an id' do
-      it 'retrieves the employee info' do
-        get "employee?Body=#{peters.first.id}"
+    context 'when specifying an ID' do
+      it "retrieves employee's info" do
+        get '/employee', Body: peters.first.id.to_s
 
-        response = Nokogiri::XML(last_response.body)
-        messages = response.xpath('Response/Message/Body')
-        media = response.xpath('Response/Message/Media')
-        expect(messages.size).to eq(1)
-        expect(media.size).to eq(1)
-        expect(messages.first.inner_html).to include(
+        doc = Nokogiri::XML(last_response.body)
+        message_body  = doc.at_xpath('Response/Message/Body').content
+        message_media = doc.at_xpath('Response/Message/Media').content
+        expect(message_body).to include(
           "#{peters.first.id}-#{peters.first.name}")
-        expect(media.first.inner_html).to eq(peters.first.image_url)
+        expect(message_media).to eq(peters.first.image_url)
       end
     end
 
-    context 'when looking for unexistent employee' do
-      it 'informs that no employee was found' do
-        get 'employee?body=unexistent'
+    context 'when looking for a nonexisting employee' do
+      let(:peters) { [] }
+      it 'returns not found' do
+        get '/employee', Body: 'unexistent'
 
-        response = Nokogiri::XML(last_response.body)
-        messages = response.xpath('Response/Message')
-
-        expect(messages.size).to eq(1)
-        expect(messages.first.inner_html).to include('not found')
+        doc = Nokogiri::XML(last_response.body)
+        content = doc.at_xpath('Response/Message').content
+        expect(content).to eq('not found')
       end
     end
   end
+end
+
+private
+
+def create(_, name)
+  normalized_name = name.downcase.split.join('_')
+  Employee.create(
+    name:         name,
+    image_url:    "#{normalized_name}.png",
+    email:        "#{normalized_name}@example.com",
+    phone_number: '555-5555'
+  )
 end
