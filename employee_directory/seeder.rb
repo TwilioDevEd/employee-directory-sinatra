@@ -2,7 +2,7 @@ require_relative 'employee'
 require 'json'
 
 class Seeder
-  def self.seed()
+  def self.seed
     Employee.destroy
 
     json_file = File.read('employee_directory/seed-data.json')

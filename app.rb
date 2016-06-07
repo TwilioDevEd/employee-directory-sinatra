@@ -4,9 +4,8 @@ require 'twilio-ruby'
 require_relative 'employee_directory/employee_directory'
 
 class EmployeeDirectoryApp < Sinatra::Application
-
   set :employee_directory,
-    EmployeeDirectory::init(ENV['EMPLOYEE_DIR_DATABASE_URL'])
+      EmployeeDirectory.init(ENV['EMPLOYEE_DIR_DATABASE_URL'])
 
   get '/employee' do
     employees = settings.employee_directory.search(params['Body'])
@@ -14,14 +13,15 @@ class EmployeeDirectoryApp < Sinatra::Application
     content_type 'application/xml'
 
     case employees.size
-      when 0 then employee_not_found_message
-      when 1 then details_message(employees.first)
-      else listing_message(employees)
+    when 0 then employee_not_found_message
+    when 1 then details_message(employees.first)
+    else listing_message(employees)
     end
   end
 
   private
-  def employee_not_found_message()
+
+  def employee_not_found_message
     Twilio::TwiML::Response.new do |response|
       response.Message 'not found'
     end.to_xml
@@ -52,5 +52,5 @@ class EmployeeDirectoryApp < Sinatra::Application
     end.to_xml
   end
 
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

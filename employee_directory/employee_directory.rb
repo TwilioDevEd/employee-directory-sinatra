@@ -3,7 +3,6 @@ require_relative 'seeder'
 require_relative 'employee'
 
 module EmployeeDirectory
-
   class Searcher
     def search(employee_reference)
       if employee_reference =~ /^\d*$/
@@ -15,6 +14,7 @@ module EmployeeDirectory
   end
 
   module_function
+
   def init(database_url)
     DataMapper.setup(:default, database_url)
     DataMapper.finalize
