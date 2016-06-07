@@ -1,5 +1,5 @@
 # A sample Gemfile
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'datamapper'
@@ -11,4 +11,5 @@ group :test do
   gem 'rspec'
   gem 'nokogiri'
   gem 'rack-test'
+  gem 'rubocop'
 end
