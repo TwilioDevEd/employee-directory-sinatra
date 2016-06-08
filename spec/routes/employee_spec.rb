@@ -1,6 +1,6 @@
-require_relative 'spec_helper'
+require_relative '../spec_helper'
 
-describe 'Employee Directory App' do
+describe 'Routes::Employee' do
   let!(:peters) do
     [create(:employee, 'Peter Parker'), create(:employee, 'Peter Quill')]
   end
