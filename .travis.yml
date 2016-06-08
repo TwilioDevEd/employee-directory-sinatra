@@ -4,7 +4,7 @@ rvm:
   - rvm 2.2.2
 
 install:
-  - bundle
+  - bundle install
 
 before_script:
-  - rubocop
+  - bundle exec rubocop
