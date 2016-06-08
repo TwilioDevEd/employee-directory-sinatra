@@ -13,12 +13,13 @@ ENV['RACK_ENV'] ||= 'development'
 require 'bundler'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 
-class EmployeeDirectoryApp < Sinatra::Application
-  register Sinatra::ConfigFile
-  config_file 'config/app.yml.erb'
-  Helpers::DataMapperSetup.setup(settings.database_url)
+module EmployeeDirectory
+  class App < Sinatra::Base
+    register Sinatra::ConfigFile
+    config_file 'config/app.yml.erb'
 
-  register Routes::Employee
+    Helpers::DataMapperSetup.setup(settings.database_url)
 
-  run! if app_file == $PROGRAM_NAME
+    register Routes::Employee
+  end
 end

@@ -1,19 +1,6 @@
-ENV['RACK_ENV'] = 'test'
-
-require 'rspec'
-require 'rack/test'
-require 'nokogiri'
-require_relative '../app'
+require_relative 'spec_helper'
 
 describe 'Employee Directory App' do
-  include Rack::Test::Methods
-
-  def app
-    EmployeeDirectoryApp.new
-  end
-
-  before(:each) { Employee.destroy }
-
   let!(:peters) do
     [create(:employee, 'Peter Parker'), create(:employee, 'Peter Quill')]
   end
