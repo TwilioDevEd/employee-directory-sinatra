@@ -1,11 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/config_file'
 
-require 'data_mapper'
 require 'twilio-ruby'
 
+require_relative 'helpers/data_mapper_setup'
 require_relative 'models/employee'
-require_relative 'employee_directory/employee_directory'
 require_relative 'lib/searcher'
 
 ENV['RACK_ENV'] ||= 'development'
@@ -16,7 +15,7 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 class EmployeeDirectoryApp < Sinatra::Application
   register Sinatra::ConfigFile
   config_file 'config/app.yml.erb'
-  EmployeeDirectory.init(settings.database_url)
+  Helpers::DataMapperSetup.setup(settings.database_url)
 
   get '/employee' do
     employees = Searcher.search(params[:Body])
