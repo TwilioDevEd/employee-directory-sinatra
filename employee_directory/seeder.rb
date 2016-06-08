@@ -1,4 +1,3 @@
-require_relative 'employee'
 require 'json'
 
 class Seeder

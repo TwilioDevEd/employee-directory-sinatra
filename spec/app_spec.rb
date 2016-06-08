@@ -3,7 +3,6 @@ ENV['RACK_ENV'] = 'test'
 require 'rspec'
 require 'rack/test'
 require 'nokogiri'
-require_relative '../employee_directory/employee'
 
 ENV['EMPLOYEE_DIR_DATABASE_URL'] =
   "sqlite3://#{Dir.pwd}/employee_dir_test_database.db"

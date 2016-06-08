@@ -1,6 +1,5 @@
 require 'data_mapper'
 require_relative 'seeder'
-require_relative 'employee'
 
 module EmployeeDirectory
   class Searcher

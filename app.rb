@@ -4,6 +4,7 @@ require 'sinatra/config_file'
 require 'data_mapper'
 require 'twilio-ruby'
 
+require_relative 'models/employee'
 require_relative 'employee_directory/employee_directory'
 
 ENV['RACK_ENV'] ||= 'development'
