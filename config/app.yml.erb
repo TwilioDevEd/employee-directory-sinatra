@@ -1,5 +1,5 @@
 development:
-  database_url: <%= ENV['EMPLOYEE_DIR_DATABASE_URL'] %>
+  database_url: <%= "sqlite3://#{Dir.pwd}/employee_directory_development.db" %>
 
 test:
   database_url: <%= "sqlite3://#{Dir.pwd}/employee_directory_test.db" %>
