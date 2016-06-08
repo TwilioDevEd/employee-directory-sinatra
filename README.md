@@ -28,14 +28,6 @@ This project is built using [Sinatra](http://www.sinatrarb.com/) Framework.
    $ bundle install
    ```
 
-1. Copy the sample configuration file and edit it to match your configuration.
-
-   ```bash
-   $ cp .env.example .env
-   ```
-
-   Run `source .env` to export the environment variables.
-
 1. Make sure the tests succeed.
 
    ```bash
