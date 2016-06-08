@@ -6,10 +6,11 @@
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/employee-directory-sinatra.svg?branch=master)](https://travis-ci.org/TwilioDevEd/employee-directory-sinatra)
 
-<!--
-  You can grab the appropriate description from https://www.twilio.com/docs/tutorials.
--->
-Use Twilio to accept SMS messages and turn them into queries against a PostgreSQL database. This example functions as an Employee Directory where a mobile phone user can send a text message with a partial string of a person's name and it will return their picture and contact information (e-mail address and phone number).
+Use Twilio to accept SMS messages and turn them into queries against a
+[SQLite](https://www.sqlite.org) database. This example functions as an
+Employee Directory where a mobile phone user can send a text message with
+a partial string of a person's name and it will return their picture and
+contact information (e-mail address and phone number).
 
 ## Local Development
 
