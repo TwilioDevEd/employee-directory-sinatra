@@ -16,10 +16,10 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 class EmployeeDirectoryApp < Sinatra::Application
   register Sinatra::ConfigFile
   config_file 'config/app.yml.erb'
-  set :employee_directory, EmployeeDirectory.init(settings.database_url)
+  EmployeeDirectory.init(settings.database_url)
 
   get '/employee' do
-    employees = settings.employee_directory.search(params[:Body])
+    employees = Searcher.search(params[:Body])
 
     content_type 'application/xml'
 

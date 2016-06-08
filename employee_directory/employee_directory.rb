@@ -9,7 +9,5 @@ module EmployeeDirectory
     DataMapper.finalize
     Employee.auto_upgrade!
     Seeder.seed
-
-    Searcher.new
   end
 end
