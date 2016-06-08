@@ -5,12 +5,12 @@ describe 'Routes::Employee' do
     [create(:employee, 'Peter Parker'), create(:employee, 'Peter Quill')]
   end
 
-  describe 'GET: /employee' do
+  describe 'POST: /employee' do
     context 'when looking for Pietro' do
       let(:pietro) { create(:employee, 'Pietro Maximoff') }
 
       it "returns a TwiML with Pietro's info" do
-        get '/employee', Body: pietro.name
+        post '/employee', Body: pietro.name
 
         doc = Nokogiri::XML(last_response.body)
         message_body = doc.at_xpath('Response/Message/Body').content
@@ -19,7 +19,7 @@ describe 'Routes::Employee' do
       end
 
       it "returns Pietro's photo" do
-        get '/employee', Body: pietro.name
+        post '/employee', Body: pietro.name
 
         doc = Nokogiri::XML(last_response.body)
         media = doc.xpath('Response/Message/Media')
@@ -30,7 +30,7 @@ describe 'Routes::Employee' do
 
     context 'when looking for Peter' do
       it 'returns the people with the name Peter' do
-        get 'employee', Body: 'Peter'
+        post 'employee', Body: 'Peter'
 
         doc = Nokogiri::XML(last_response.body)
         content = doc.at_xpath('Response/Message').content
@@ -42,7 +42,7 @@ describe 'Routes::Employee' do
 
     context 'when specifying an ID' do
       it "retrieves employee's info" do
-        get '/employee', Body: peters.first.id.to_s
+        post '/employee', Body: peters.first.id.to_s
 
         doc = Nokogiri::XML(last_response.body)
         message_body  = doc.at_xpath('Response/Message/Body').content
@@ -56,7 +56,7 @@ describe 'Routes::Employee' do
     context 'when looking for a nonexisting employee' do
       let(:peters) { [] }
       it 'returns not found' do
-        get '/employee', Body: 'unexistent'
+        post '/employee', Body: 'unexistent'
 
         doc = Nokogiri::XML(last_response.body)
         content = doc.at_xpath('Response/Message').content

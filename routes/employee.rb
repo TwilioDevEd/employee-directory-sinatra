@@ -3,7 +3,7 @@ require_relative '../lib/message_creator'
 module Routes
   module Employee
     def self.registered(app)
-      app.get '/employee' do
+      app.post '/employee' do
         content_type 'application/xml'
 
         employees = Searcher.search(params[:Body])
