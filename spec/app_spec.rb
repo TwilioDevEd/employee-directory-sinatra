@@ -3,12 +3,9 @@ ENV['RACK_ENV'] = 'test'
 require 'rspec'
 require 'rack/test'
 require 'nokogiri'
-
-ENV['EMPLOYEE_DIR_DATABASE_URL'] =
-  "sqlite3://#{Dir.pwd}/employee_dir_test_database.db"
 require_relative '../app'
 
-RSpec.describe 'Employee Directory App' do
+describe 'Employee Directory App' do
   include Rack::Test::Methods
 
   def app
