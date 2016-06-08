@@ -6,6 +6,7 @@ require 'twilio-ruby'
 
 require_relative 'models/employee'
 require_relative 'employee_directory/employee_directory'
+require_relative 'lib/searcher'
 
 ENV['RACK_ENV'] ||= 'development'
 
