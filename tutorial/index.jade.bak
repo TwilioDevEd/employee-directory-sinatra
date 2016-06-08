@@ -64,7 +64,7 @@
     ## Receive an Incoming SMS
 
     When your number receives an SMS message,
-    Twilio will send an HTTP POST request to our application. This
+    [Twilio will send an HTTP POST request to our application][webhook]. This
     will be handled by the `/employee` endpoint.
 
     We use the `search` method to look for an employee based upon
@@ -80,7 +80,7 @@
     * [How Twilio Passes Data to Your Application][webhook]
     * [TwiML: The Twilio Markup Language][twiml]
 
-    [webhook]: https://www.twilio.com/docs/api/twiml/sms/twilio_request
+    [webhook]:  https://www.twilio.com/docs/api/twiml/sms/twilio_request
     [twiml]: https://www.twilio.com/docs/api/twiml
 
 .step(
@@ -126,10 +126,10 @@
   :markdown
     ## Returning Employee's Contact Information by Number Choice
 
-    When searching for an employee, we check whether the body of
+    When searching for an employee, we check wether the body of
     the text input is a number. If that's the case, we use it
     to retrieve the employee by its id. On the other case, we
-    use it to do a search by employee's name.
+    use it to do a search by employeer's name.
 
     ![winning](//howtodocs.s3.amazonaws.com/employee-directory/win.gif)
 
@@ -137,7 +137,7 @@
   data-title='Where to Next',
   data-file='app.rb')
   :markdown
-    ## Where to Next?
+    ## Where to next?
 
     Take a look at [the code on GitHub][gh] to run the application
     yourself. There you will find the complete solution and
