@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.org/TwilioDevEd/employee-directory-sinatra.svg?branch=master)](https://travis-ci.org/TwilioDevEd/employee-directory-sinatra)
 
 Use Twilio to accept SMS messages and turn them into queries against a
-[SQLite](https://www.sqlite.org) database. This example functions as an
+[SQLite](https://www.sqlite.org) database. These are example functions of an
 Employee Directory where a mobile phone user can send a text message with
 a partial string of a person's name and it will return their picture and
 contact information (e-mail address and phone number).
@@ -48,4 +48,3 @@ This project is built using [Sinatra](http://www.sinatrarb.com/) Framework.
 * No warranty expressed or implied. Software is as is. Diggity.
 * [MIT License](http://www.opensource.org/licenses/mit-license.html)
 * Lovingly crafted by Twilio Developer Education.
-
