@@ -21,10 +21,10 @@
     * [Sinatra](http://www.sinatrarb.com/)
 
 .step(
-  data-title='Create an Employee Model',
+  data-title='Creating an Employee Model',
   data-file='models/employee.rb')
   :markdown
-    ## Create an Employee Model
+    ## Creating an Employee Model
 
     The first thing we need is a database of employees. We will be using
     [DataMapper](//datamapper.org/) for this. It will allow us to define our
@@ -42,10 +42,10 @@
     * [DataMapper](//datamapper.org)
 
 .step(
-  data-title='Search for an Employee by Name',
+  data-title='Searching for an Employee by Name',
   data-file='lib/searcher.rb')
   :markdown
-    ## Search for an Employee
+    ## Searching for an Employee by Name
 
     The `Searcher` module allows us to search the database for employees either
     by name or by their unique database identifier.
@@ -58,10 +58,10 @@
     which we'll look at next.
 
 .step(
-  data-title='Receive an Incoming SMS',
+  data-title='Receiving an Incoming SMS',
   data-file='routes/employee.rb')
   :markdown
-    ## Receive an Incoming SMS
+    ## Receiving an Incoming SMS
 
     When your number receives an SMS message,
     Twilio will send an HTTP POST request to our application. This
@@ -93,7 +93,7 @@
     Let's say the service finds a single employee matching the
     text message. In this case, we write out a response that
     contains the employee's contact information, including a photo,
-    making our response a MMS message.
+    making our response an MMS message.
 
     A single matching employee isn't the only scenario, however.
 
@@ -112,7 +112,7 @@
     "Not found" message.
 
     What about multiple matches? For this case, we want to return
-    a list of the matching employees' names along with an id number
+    a list of the matching employees' names along with an ID number
     the end user can use to make their selection. For example,
     if someone searched for "Peter" they might get something like:
 
@@ -128,13 +128,13 @@
 
     When searching for an employee, we check whether the body of
     the text input is a number. If that's the case, we use it
-    to retrieve the employee by its id. On the other case, we
+    to retrieve the employee by its ID. On the other situation, we
     use it to do a search by employee's name.
 
     ![winning](//howtodocs.s3.amazonaws.com/employee-directory/win.gif)
 
 .step(
-  data-title='Where to Next',
+  data-title='Where to Next?',
   data-file='app.rb')
   :markdown
     ## Where to Next?
@@ -154,6 +154,6 @@
 
     ### Did this help?
 
-    Thanks for checking out this tutorial! If you have any feedback
+    Thanks for checking this tutorial out! If you have any feedback
     to share with us, we'd love to hear it.
     [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
