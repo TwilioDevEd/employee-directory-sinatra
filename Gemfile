@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'sinatra-contrib'
 gem 'datamapper'
 gem 'dm-sqlite-adapter'
 gem 'json'
+gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'twilio-ruby', '~> 5.0.0.rc21'
 
 group :test, :development do
@@ -13,8 +13,8 @@ group :test, :development do
 end
 
 group :test do
-  gem 'rake'
-  gem 'rack-test'
   gem 'database_cleaner'
   gem 'nokogiri'
+  gem 'rack-test'
+  gem 'rake'
 end
