@@ -18,13 +18,9 @@ class MessageCreator
   def employee_details
     employee = employees.first
 
-    employee_info = "#{employee.id}-#{employee.name}" \
-      " #{employee.email}" \
-      " #{employee.phone_number}"
-
     response = Twilio::TwiML::MessagingResponse.new
     message = Twilio::TwiML::Message.new
-    body = Twilio::TwiML::Body.new(employee_info)
+    body = Twilio::TwiML::Body.new(format_employee_info(employee))
     media = Twilio::TwiML::Media.new(employee.image_url)
 
     response.append(message)
@@ -42,5 +38,11 @@ class MessageCreator
     employees.map do |employee|
       "#{employee.id}-#{employee.name}"
     end
+  end
+
+  def format_employee_info(employee)
+    "#{employee.id}-#{employee.name}" \
+      " #{employee.email}" \
+      " #{employee.phone_number}"
   end
 end

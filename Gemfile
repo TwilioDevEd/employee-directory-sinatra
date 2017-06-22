@@ -17,5 +17,4 @@ group :test do
   gem 'nokogiri'
   gem 'rack-test'
   gem 'rake'
-  gem 'byebug'
 end
