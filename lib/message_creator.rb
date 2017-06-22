@@ -4,30 +4,34 @@ class MessageCreator
   end
 
   def employee_not_found
-    Twilio::TwiML::Response.new do |response|
-      response.Message 'not found'
-    end.to_xml
+    response = Twilio::TwiML::MessagingResponse.new
+    response.message 'not found'
+    response.to_xml_str
   end
 
   def employees_options
-    Twilio::TwiML::Response.new do |response|
-      response.Message employees_labels.join(' ')
-    end.to_xml
+    response = Twilio::TwiML::MessagingResponse.new
+    response.message employees_labels.join(' ')
+    response.to_xml_str
   end
 
   def employee_details
     employee = employees.first
 
-    Twilio::TwiML::Response.new do |response|
-      employee_info = "#{employee.id}-#{employee.name}" \
+    employee_info = "#{employee.id}-#{employee.name}" \
       " #{employee.email}" \
       " #{employee.phone_number}"
 
-      response.Message do |message|
-        message.Body employee_info
-        message.Media employee.image_url
-      end
-    end.to_xml
+    response = Twilio::TwiML::MessagingResponse.new
+    message = Twilio::TwiML::Message.new
+    body = Twilio::TwiML::Body.new(employee_info)
+    media = Twilio::TwiML::Media.new(employee.image_url)
+
+    response.append(message)
+    message.append(body)
+    message.append(media)
+
+    response.to_xml_str
   end
 
   private
