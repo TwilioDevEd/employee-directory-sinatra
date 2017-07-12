@@ -5,14 +5,14 @@ class MessageCreator
 
   def employee_not_found
     response = Twilio::TwiML::MessagingResponse.new
-    response.message 'not found'
-    response.to_xml_str
+    response.message(body: 'not found')
+    response.to_s
   end
 
   def employees_options
     response = Twilio::TwiML::MessagingResponse.new
-    response.message employees_labels.join(' ')
-    response.to_xml_str
+    response.message(body: employees_labels.join(' '))
+    response.to_s
   end
 
   def employee_details
@@ -27,7 +27,7 @@ class MessageCreator
     message.append(body)
     message.append(media)
 
-    response.to_xml_str
+    response.to_s
   end
 
   private

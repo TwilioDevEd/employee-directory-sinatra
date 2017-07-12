@@ -8,7 +8,6 @@ GEM
     bcrypt (3.1.11)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
-    byebug (9.0.6)
     data_objects (0.10.17)
       addressable (~> 2.1)
     database_cleaner (1.6.1)
@@ -118,7 +117,7 @@ GEM
       tilt (>= 1.3, < 3)
     stringex (1.5.1)
     tilt (2.0.7)
-    twilio-ruby (5.0.0.rc23)
+    twilio-ruby (5.0.0.rc26)
       faraday (~> 0.9)
       jwt (~> 1.5)
       libxml-ruby (= 3.0.0)
@@ -129,7 +128,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   database_cleaner
   datamapper
   dm-sqlite-adapter
@@ -141,7 +139,7 @@ DEPENDENCIES
   rubocop
   sinatra
   sinatra-contrib
-  twilio-ruby (~> 5.0.0.rc23)
+  twilio-ruby (~> 5.0.0.rc26)
 
 BUNDLED WITH
    1.15.1

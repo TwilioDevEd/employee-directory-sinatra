@@ -5,7 +5,7 @@ gem 'dm-sqlite-adapter'
 gem 'json'
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'twilio-ruby', '~> 5.0.0.rc23'
+gem 'twilio-ruby', '~> 5.0.0.rc26'
 
 group :test, :development do
   gem 'rspec'
