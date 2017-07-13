@@ -1,5 +1,6 @@
 require_relative '../spec_helper'
 
+# rubocop:disable Metrics/BlockLength
 describe 'Routes::Employee' do
   let!(:peters) do
     [create(:employee, 'Peter Parker'), create(:employee, 'Peter Quill')]
@@ -48,7 +49,8 @@ describe 'Routes::Employee' do
         message_body  = doc.at_xpath('Response/Message/Body').content
         message_media = doc.at_xpath('Response/Message/Media').content
         expect(message_body).to include(
-          "#{peters.first.id}-#{peters.first.name}")
+          "#{peters.first.id}-#{peters.first.name}"
+        )
         expect(message_media).to eq(peters.first.image_url)
       end
     end
