@@ -117,7 +117,7 @@ GEM
       tilt (>= 1.3, < 3)
     stringex (1.5.1)
     tilt (2.0.7)
-    twilio-ruby (5.0.0.rc26)
+    twilio-ruby (5.0.0)
       faraday (~> 0.9)
       jwt (~> 1.5)
       libxml-ruby (= 3.0.0)
@@ -139,7 +139,7 @@ DEPENDENCIES
   rubocop
   sinatra
   sinatra-contrib
-  twilio-ruby (~> 5.0.0.rc26)
+  twilio-ruby (>= 5.0.0)
 
 BUNDLED WITH
    1.15.1
