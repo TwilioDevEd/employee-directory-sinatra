@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'datamapper'
-gem 'dm-sqlite-adapter'
+gem 'datamapper', '>= 1.2.0'
+gem 'dm-sqlite-adapter', '>= 1.2.0'
 gem 'json'
 gem 'sinatra'
 gem 'sinatra-contrib'
